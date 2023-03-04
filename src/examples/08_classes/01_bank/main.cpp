@@ -9,14 +9,13 @@ int main()
 	srand(time(NULL));
 
 	CheckingAccount account;
-	cout<<account;
-	cout<<account.get_balance()<<"\n";
 
-	show_balance(account);
+	run_menu(account);
 
-	cout<<account.get_balance()<<"\n";
+	//cout<<account;
+	//cout<<account.get_balance()<<"\n";
 
-	//run_menu(account);
-
+	// show_balance(account);
+	// cout<<account.get_balance()<<"\n";
 	return 0;
 }

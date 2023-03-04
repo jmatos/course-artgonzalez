@@ -40,7 +40,7 @@ void handle_menu_option(int option, CheckingAccount &account) {
             cout<<"Balance: "<<account.get_balance()<<"\n";
             break;
         case 4:
-            cout<<"Exiting...";
+            cout<<"Exiting...\n";
             break;
         default:
             cout<<"Invalid option!";
