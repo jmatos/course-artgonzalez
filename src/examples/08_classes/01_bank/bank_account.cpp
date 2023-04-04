@@ -1,6 +1,10 @@
 //bank_account.cpp
 #include "bank_account.h"
 
+int BankAccount::get_balance() const {
+    return balance;
+}
+
 void BankAccount::get_balance_from_db() {
     balance = rand() % 10000 + 1; //value between 1 and 10000
 }

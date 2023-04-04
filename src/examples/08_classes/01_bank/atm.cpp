@@ -1,5 +1,6 @@
 //atm.cpp
 #include "atm.h"
+#include "customer.h"
 
 using std::cout;
 using std::cin;
@@ -13,14 +14,17 @@ void display_menu() {
     cout<<"4-Exit\n";
 }
 
-void run_menu(vector<unique_ptr<BankAccount>> &accounts) {
+void run_menu(vector<Customer> &customers) {
     auto option = 0;
     auto choice = 0;
+
+    auto customer_index = scan_card(customers.size());
+    auto customer = customers[customer_index];
 
     cout<<"Checkint(1) or Savings(2): ";
     cin>>choice;
 
-    unique_ptr<BankAccount> &account = accounts[choice-1];
+    unique_ptr<BankAccount> &account = customer.get_account(0);
 
     do {
         display_menu();
@@ -53,4 +57,8 @@ void handle_menu_option(int option, unique_ptr<BankAccount> &account) {
             cout<<"Invalid option!";
             break;
     }
+}
+
+int scan_card(int max_value) {
+    return rand()*max_value;
 }
