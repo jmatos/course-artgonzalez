@@ -1,10 +1,10 @@
-#include "checking_account.h"
-#include "savings_account.h"
+//customer.cpp
 #include "customer.h"
 
 using std::make_unique;
 
-Customer::Customer() {
+Customer::Customer()
+{
     accounts.push_back(make_unique<CheckingAccount>());
     accounts.push_back(make_unique<SavingsAccount>());
 }
