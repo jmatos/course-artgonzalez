@@ -8,9 +8,9 @@ void displayGameTotals(TicTacToeManager manager) {
 
 	manager.get_winner_total(o, x, t);
 
-	cout<<"O wins: "<<o;
-	cout<<"X wins: "<<x;
-	cout<<"TIES: "<<t;
+	cout<<"O wins: "<<o<<"\n";
+	cout<<"X wins: "<<x<<"\n";
+	cout<<"TIES: "<<t<<"\n";
 }
 
 int main() 
@@ -47,7 +47,8 @@ int main()
 		}		
 	}	
 
-	cout<<manager<<"\n\n";
+	cout<<"Board History\n\n";
+	cout<<manager;
 	displayGameTotals(manager);
 
 	return 0;
