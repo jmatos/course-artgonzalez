@@ -56,19 +56,6 @@ string TicTacToe::get_player() const {
     return player;
 };
 
-void TicTacToe::display_board() const {
-    int counter = 1;
-    for (string peg: pegs) {
-        cout<<peg;
-        if (counter % 3 == 0) {
-            cout<<"\n";
-        } else {
-            cout<<"|";
-        }
-        counter++;
-    }
-};
-
 bool TicTacToe::pegs_equal_and_not_space(int pos1, int pos2, int pos3) {
     if (pegs[pos1-1] == pegs[pos2-1] && pegs[pos2-1] == pegs[pos3-1]) {
         if (pegs[pos1-1] != " ") {
@@ -133,4 +120,32 @@ void TicTacToe::set_winner() {
 
 string TicTacToe::get_winner() {
     return winner;
-}
+};
+
+std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
+{
+    int counter = 1;
+    for (string peg: game.pegs) {
+        out<<peg;
+        if (counter % 3 == 0) {
+            out<<"\n";
+        } else {
+            out<<"|";
+        }
+        counter++;
+    }
+    return out;
+};
+
+std::istream& operator>>(std::istream& in, TicTacToe& game) {
+    int position;
+    cout<<"Enter a position from 1 to 9: ";
+    in>>position;
+    if (position >= 1 && position <= 9) {
+        game.mark_board(position);        
+    } else {
+        cout<<"Invalid input!\n";
+    }
+    return in;
+};
+
