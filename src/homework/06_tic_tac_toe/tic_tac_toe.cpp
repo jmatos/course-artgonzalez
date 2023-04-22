@@ -20,7 +20,7 @@ bool TicTacToe::check_board_full() {
 };
 
 void TicTacToe::clear_board() {
-    pegs = {" ", " ", " ", " ", " ", " ", " ", " ", " "};
+    pegs.assign(pegs.size(), " ");
 };
 
 //public functions
@@ -56,57 +56,15 @@ string TicTacToe::get_player() const {
     return player;
 };
 
-bool TicTacToe::pegs_equal_and_not_space(int pos1, int pos2, int pos3) {
-    if (pegs[pos1-1] == pegs[pos2-1] && pegs[pos2-1] == pegs[pos3-1]) {
-        if (pegs[pos1-1] != " ") {
-            return true;
-        }
-    }
-    return false;
-};
-
 bool TicTacToe::check_diagonal_win() {
-
-    if (pegs_equal_and_not_space(1, 5, 9)) {
-        return true;
-    }
-
-    if (pegs_equal_and_not_space(3, 5, 7)) {
-        return true;
-    }    
-
     return false;
 };
 
 bool TicTacToe::check_row_win() {
-    if (pegs_equal_and_not_space(1, 2, 3)) {
-        return true;
-    }
-
-    if (pegs_equal_and_not_space(4, 5, 6)) {
-        return true;
-    }
-
-    if (pegs_equal_and_not_space(7, 8, 9)) {
-        return true;
-    }
-
     return false;
 };
 
 bool TicTacToe::check_column_win() {
-    if (pegs_equal_and_not_space(1, 4, 7)) {
-        return true;
-    }
-
-    if (pegs_equal_and_not_space(2, 5, 8)) {
-        return true;
-    }
-
-    if (pegs_equal_and_not_space(3, 6, 9)) {
-        return true;
-    }
-
     return false;
 };
 
@@ -122,12 +80,13 @@ string TicTacToe::get_winner() {
     return winner;
 };
 
-std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
+ostream& operator<<(ostream& out, const TicTacToe& game)
 {
     int counter = 1;
+    int columns = game.pegs.size() == 9 ? 3 : 4;
     for (string peg: game.pegs) {
         out<<peg;
-        if (counter % 3 == 0) {
+        if (counter % columns == 0) {
             out<<"\n";
         } else {
             out<<"|";
@@ -137,15 +96,15 @@ std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
     return out;
 };
 
-std::istream& operator>>(std::istream& in, TicTacToe& game) {
+istream& operator>>(istream& in, TicTacToe& game) {
     int position;
-    cout<<"Enter a position from 1 to 9: ";
+    int size = game.pegs.size();
+    cout<<"Enter a position from 1 to "<<size<<": ";
     in>>position;
-    if (position >= 1 && position <= 9) {
-        game.mark_board(position);        
+    if (position >= 1 && position <= size) {
+        game.mark_board(position);
     } else {
         cout<<"Invalid input!\n";
     }
     return in;
 };
-

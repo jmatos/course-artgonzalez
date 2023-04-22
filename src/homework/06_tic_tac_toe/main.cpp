@@ -1,4 +1,6 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
 
 void displayGameTotals(TicTacToeManager manager) {
@@ -15,8 +17,23 @@ void displayGameTotals(TicTacToeManager manager) {
 
 int main() 
 {
-	TicTacToeManager manager;
-	TicTacToe game;
+	TicTacToeManager manager;	
+	unique_ptr<TicTacToe> game;
+	
+	int gameType;
+
+	do {
+		cout<<"Please enter pick your TicTacToe game type (3x3 or 4x4)\n";
+		cout<<"Enter 3 or 4:";
+		cin>>gameType;
+
+		if (gameType == 3) {
+			game = make_unique<TicTacToe3>();
+		} else if (gameType == 4) {
+			game = make_unique<TicTacToe4>();
+		}
+	} while (gameType != 3 && gameType != 4);
+	
 
 	bool keep_going = true;
 	string player;
@@ -26,10 +43,10 @@ int main()
 		cout<<"Enter X or O: ";
 		cin>>player;
 		if (player == "X" || player == "O") {
-			game.start_game(player);
-			while (!game.game_over()) {
-				cin>>game;
-				cout<<game;
+			game->start_game(player);
+			while (!game->game_over()) {
+				cin>>*game;
+				cout<<*game;
 			}
 			manager.save_game(game);
 			cout<<"Game over!\n\n";
