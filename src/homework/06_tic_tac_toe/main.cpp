@@ -2,6 +2,7 @@
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_data.h"
 
 void displayGameTotals(TicTacToeManager manager) {
 	int o = 0;
@@ -17,7 +18,8 @@ void displayGameTotals(TicTacToeManager manager) {
 
 int main() 
 {
-	TicTacToeManager manager;	
+	TicTacToeData data;
+	TicTacToeManager manager(data);
 	unique_ptr<TicTacToe> game;
 	
 	int gameType;
